@@ -38,6 +38,14 @@ export class News extends Component {
       totalResults:parsedData.totalResults,
       loading:false})
   }
+  async componentDidUpdate(prevProps) {
+    if (prevProps.country !== this.props.country) {
+      console.log('Country changed:', this.props.country);
+      this.componentDidMount();
+      //  Note: We can remove this componentdidMOunt from here and then create seperate fetchData function which will make api request, and then we can use that method here and also in compoenentDidMount function. Because after changing the country the compoenent was not fetching the data again, so we added here to manually fetch the data again. 
+      //  Make the API request or perform any necessary actions based on the new country value
+    }
+  }
 
 handlePrevClick=async()=>{
     this.setState({loading:true});

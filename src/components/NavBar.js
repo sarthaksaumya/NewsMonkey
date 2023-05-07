@@ -27,6 +27,15 @@ export class NavBar extends Component {
                 <select className="dropdown-menu-dark" onChange={this.handleOnChange}>
                   <option value="in">India</option>
                   <option value="us">USA</option>
+                  <option value="ru">Russia</option>
+                  <option value="hk">Hong Kong</option>
+                  <option value="gb">United Kingdom</option>
+                  <option value="ap">Japan</option>
+                  <option value="tw">Taiwan</option>
+                  <option value="de">Germany</option>
+                  <option value="kr">South Korea</option>
+                  <option value="il">Israel</option>
+                  <option value="nz">New Zealand</option>
                 </select>
             </div>
           </div>
