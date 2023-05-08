@@ -1,12 +1,11 @@
-import React, { Component} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 
-export class NavBar extends Component {
-  handleOnChange=(event)=>{
-    this.props.onCountryChange(event.target.value);
-    // event.preventDefault();
+const NavBar=(props)=> {
+  const handleOnChange=(event)=>{
+    props.onCountryChange(event.target.value);
   }
-  render() {
+  
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -35,7 +34,7 @@ export class NavBar extends Component {
                 </ul>
               </div>
               <div className="d-flex">
-                  <select className="dropdown-menu-dark" onChange={this.handleOnChange}>
+                  <select className="dropdown-menu-dark" onChange={handleOnChange}>
                     <option value="in">India</option>
                     <option value="us">USA</option>
                     <option value="ru">Russia</option>
@@ -54,6 +53,6 @@ export class NavBar extends Component {
       </div>
     )
   }
-}
+
 
 export default NavBar
