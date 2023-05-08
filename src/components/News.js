@@ -4,7 +4,6 @@ import Spinner from './Spinner';
 import PropTypes from 'prop-types'
 import ImageNotAvailable from './ImageNotAvailable.png'
 import InfiniteScroll from 'react-infinite-scroll-component';
-
 export class News extends Component {
 
   static defaultProps = {
@@ -21,7 +20,7 @@ export class News extends Component {
   constructor(props){
     super(props);
     this.state={
-        apiKey:"c663e15a0c4d4460bd06c2f1099e70dc",
+        apiKey:this.props.apiKey,
         articles:[],
         loading:true,
         page:1,
@@ -39,15 +38,19 @@ export class News extends Component {
     }
   }
   async updateNews(){
+    this.props.setProgress(10);
     this.setState({loading:true});
     let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.state.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data=await fetch(url);
+    this.props.setProgress(30);
     let parsedData=await data.json();
+    this.props.setProgress(70);
     this.setState({
       articles:parsedData.articles, 
       totalResults:parsedData.totalResults,
       loading:false,
     })
+    this.props.setProgress(100);
   }
   fetchMoreData = async () => {
     this.setState({page:this.state.page+1})
