@@ -21,9 +21,9 @@ const News =(props)=> {
   const [loading,setLoading]=useState(true)
   const [page,setPage]=useState(1)
   const [totalResults,setTotalResults]=useState(0)
-  // document.title=`${props.category.charAt(0).toUpperCase() + props.category.slice(1)} - NewsMonkey`;
 
   const updateNews=async()=>{
+    
     props.setProgress(10);
     setLoading(true);
     let url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${apiKey}&page=${page}&pageSize=${props.pageSize}`;
@@ -38,18 +38,21 @@ const News =(props)=> {
   }
   const fetchMoreData = async () => {
     let url=`https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
+    setPage(page+1);
+    //Note heresetPage is async function so it will take some time to update the page number, that is the reasn we have not used setPage before "url" because in the url will, the page number syll be previous one and not updated to page+1.
     let data=await fetch(url);
     let parsedData=await data.json();
-    setPage(page+1);
     setArticles(articles.concat(parsedData.articles));
     setTotalResults(parsedData.totalResults)
   };
 
   useEffect(() => {
+    document.title=`${props.category.charAt(0).toUpperCase() + props.category.slice(1)} - NewsMonkey`;
     const fetchData = async () => {
       await updateNews();
     };
     fetchData();
+    //eslint-disable-next-line
   },[props.country]);
     return (
       <>

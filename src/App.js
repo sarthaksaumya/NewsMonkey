@@ -20,11 +20,12 @@ const App=()=> {
   const setProgressBar=(p)=>{
     setProgress(p)
   }
-
     return (
       <div>
         <BrowserRouter>
-        <NavBar onCountryChange={handleCountryChange}/>
+        <div className="sticky-top">
+          <NavBar onCountryChange={handleCountryChange}/>
+        </div>
           <LoadingBar
           height={3}
           color='#f11946'
